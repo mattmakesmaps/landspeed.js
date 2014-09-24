@@ -27,15 +27,22 @@ module.exports = function(args) {
     }, args.concurrency);
 
     return function(query, callback) {
+        // Set width and height if not specified.
         query.width = +query.width || 256;
         query.height = +query.height || 256;
+
+        // Throw error in event of invalid sizes.
         if (query.width < 1 || query.width > 2048 || query.height < 1 || query.height > 2048) {
             return callback(new Error('Invalid size: ' + query.width + '×' + query.height));
         }
 
+        // check for valid bbox passed in from URL.
         var bbox = query.bbox ? query.bbox.split(',') : [];
+        // error checking on number of bbox elements.
         if (bbox.length !== 4) return callback(new Error('Invalid bbox: ' + util.inspect(bbox)));
+        // Map the function parseFloat to all elements of the bbox array, replacing elements with floats.
         bbox = bbox.map(parseFloat);
+        // error checking on bbox element types.
         for (var i = 0; i < 4; i++) {
             if (isNaN(bbox[i])) return callback(new Error('Invalid bbox: ' + util.inspect(bbox)));
         }

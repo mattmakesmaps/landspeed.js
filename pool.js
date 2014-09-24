@@ -1,3 +1,4 @@
+// This module exports a constructor for an object, 'Pool'.
 module.exports = Pool;
 function Pool(initialize, capacity) {
     this.objects = [];
@@ -5,6 +6,8 @@ function Pool(initialize, capacity) {
 
     if (!capacity) capacity = 5;
     console.warn('Pool capacity: %d', capacity);
+
+    // SEE: http://nodejs.org/api/process.html#process_process_nexttick_callback
     process.nextTick(function() {
         for (var i = 0; i < capacity; i++) {
             initialize();
