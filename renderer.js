@@ -11,17 +11,24 @@ module.exports = function(args) {
     if (!args.bufferSize) args.bufferSize = 0;
 
     var created = 0;
+    // The anonymous function passed to the Pool constructor is executed
+    // each tick as as many times as is set by args.concurrency,
+    // or defaults to five.
     var maps = new Pool(function() {
+        // This function actually handles the code to render the map tile.
         var map = new mapnik.Map(256, 256);
         map.bufferSize = args.bufferSize;
         map.load(args.stylesheet, {
             strict: true,
             base: path.dirname(args.stylesheet)
         }, function(err, map) {
+            // Is this a callback for the load() method
+            // of whatever is returned by mapnik.Map()?
             if (err) throw err;
             map.zoomAll();
             created++;
             util.print('\rCreating map objects (' + created + '/' + args.concurrency + ')...');
+            // Call the release() method of the pool object.
             maps.release(map);
         });
     }, args.concurrency);
