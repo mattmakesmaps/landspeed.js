@@ -4,6 +4,13 @@ var path = require('path');
 var util = require('util');
 var Pool = require('./pool');
 
+/**
+ * This module exports a function, which itself returns a function.
+ * When external code `require(./renderer.js)` and calls the renderer()
+ * method, a Pool instance is constructed, to handle processing of indivudal tiles.
+ * Additionally, a function is returned that accepts a query and a callback.
+ */
+
 module.exports = function(args) {
     if (!args.stylesheet) throw new Error('missing stylesheet');
     args.stylesheet = path.resolve(args.stylesheet);
@@ -34,6 +41,16 @@ module.exports = function(args) {
     }, args.concurrency);
 
     return function(query, callback) {
+        /**
+         * This function parses width,height,bbox from set of URL query params.
+         *
+         * After, it calls the acquire() method on the Pool() instance `maps`.
+         * This basically loads the Pool queue with instances of mapnik.Map(),
+         * to be rendered according to a specific width/height/bbox.
+         *
+         * Question: How are the individual tiles being requested? That must be
+         * happeneing through a client such as openlayers or leaflet.
+         */
         // Set width and height if not specified.
         query.width = +query.width || 256;
         query.height = +query.height || 256;
@@ -55,6 +72,8 @@ module.exports = function(args) {
         }
 
         maps.acquire(function(map) {
+            // I think all this is doing is setting the tile width heigh and bbox,
+            // then actually generating the tile.
             map.resize(query.width, query.height);
             if (query.srs) map.srs = '+init=' + query.srs;
             map.extent = bbox;
