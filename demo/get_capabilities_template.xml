@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding="ISO-8859-1" standalone="no" ?>
+<!DOCTYPE WMT_MS_Capabilities SYSTEM "http://schemas.opengis.net/wms/1.1.1/WMS_MS_Capabilities.dtd"
+ [
+ <!ELEMENT VendorSpecificCapabilities EMPTY>
+ ]>  <!-- end of DOCTYPE declaration -->
+
+<WMT_MS_Capabilities version="1.1.1">
+
+<!-- MapServer version 5.6.5 OUTPUT=GIF OUTPUT=PNG OUTPUT=JPEG OUTPUT=WBMP OUTPUT=SWF OUTPUT=SVG SUPPORTS=PROJ SUPPORTS=AGG SUPPORTS=FREETYPE SUPPORTS=ICONV SUPPORTS=WMS_SERVER SUPPORTS=WMS_CLIENT SUPPORTS=WFS_SERVER SUPPORTS=WFS_CLIENT SUPPORTS=WCS_SERVER SUPPORTS=GEOS SUPPORTS=RGBA_PNG INPUT=EPPL7 INPUT=POSTGIS INPUT=OGR INPUT=GDAL INPUT=SHAPEFILE -->
+
+<Service>
+  <Name>OGC:WMS</Name>
+  <Title>Landspeed JS WMS Service</Title>
+  <Abstract>Landspeed JS WMS Service Abstract</Abstract>
+  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://mkenny-ubuntu:8000/?"/>
+  <ContactInformation>
+  </ContactInformation>
+</Service>
+
+<Capability>
+  <Request>
+    <GetCapabilities>
+      <Format>application/vnd.ogc.wms_xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://mkenny-ubuntu:8000/?"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://mkenny-ubuntu:8000/?"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetCapabilities>
+    <GetMap>
+      <Format>image/png</Format>
+      <Format>image/png; mode=24bit</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://mkenny-ubuntu:8000/?"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://mkenny-ubuntu:8000/?"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetMap>
+  </Request>
+  <Exception>
+    <Format>application/vnd.ogc.se_xml</Format>
+    <Format>application/vnd.ogc.se_inimage</Format>
+    <Format>application/vnd.ogc.se_blank</Format>
+  </Exception>
+  <VendorSpecificCapabilities />
+  <UserDefinedSymbolization SupportSLD="1" UserLayer="0" UserStyle="1" RemoteWFS="0"/>
+  <Layer>
+    <Name>Landspeed.JS Base Layer</Name>
+    <Title>Landspeed.JS Base Layer</Title>
+    <Abstract>MKenny Landspeed.JS Layer Abstract</Abstract>
+    <SRS>EPSG:4269</SRS>
+    <SRS>EPSG:4326</SRS>
+    <SRS>EPSG:3857</SRS>
+    <LatLonBoundingBox minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
+    <Layer queryable="0" opaque="0" cascaded="0">
+        <Name>bathymetry</Name>
+        <Title>Elevation/Bathymetry</Title>
+        <SRS>EPSG:4326</SRS>
+        <LatLonBoundingBox minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
+    </Layer>
+    <Layer queryable="0" opaque="0" cascaded="0">
+        <Name>land_fn</Name>
+        <Title>Foreign Lands</Title>
+        <SRS>EPSG:4326</SRS>
+        <LatLonBoundingBox minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
+    </Layer>
+  </Layer>
+</Capability>
+</WMT_MS_Capabilities>

@@ -8,6 +8,7 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var mapnik = require('mapnik');
+var mapnik2gc = require('./stylesheet_2_getcapabilities.js');
 // register fonts and datasource plugins
 mapnik.register_default_fonts();
 mapnik.register_default_input_plugins();
@@ -77,20 +78,35 @@ var server = http.createServer(function(req, res) {
      * to handle the return value from the renderer()
      * method.
      */
-    renderer(uri.query, function(err, tile) {
-        if (err || !tile || !isPNG(tile)) {
-            res.writeHead(500, {
-                'Content-Type': 'text/plain; charset=utf-8'
-            });
-            res.end(err ? err.stack : "Rendering didn't produce a proper tile");
-        } else {
-            res.writeHead(200, {
-                'Content-Length': tile.length,
-                'Content-Type': 'image/png'
-            });
-            res.end(tile);
-        }
-    });
+
+    // If we have a getmap query, return the image.
+    if (uri.query.hasOwnProperty('request') && uri.query.request.toLowerCase() == 'getmap') {
+        renderer(uri.query, function(err, tile) {
+            if (err || !tile || !isPNG(tile)) {
+                res.writeHead(500, {
+                    'Content-Type': 'text/plain; charset=utf-8'
+                });
+                res.end(err ? err.stack : "Rendering didn't produce a proper tile");
+            } else {
+                res.writeHead(200, {
+                    'Content-Length': tile.length,
+                    'Content-Type': 'image/png'
+                });
+                res.end(tile);
+            }
+        });
+    }
+
+    if (uri.query.hasOwnProperty('request') && uri.query.request.toLowerCase() == 'getcapabilities') {
+        // Create readstream to example getcapabilities response
+        mapnik2gc('demo/world_latlon.xml', function(gc_response){
+            // write out content type
+            res.writeHead(200, {'Content-Type': 'application/vnd.ogc.wms_xml'});
+            // pipe out xml to response
+            res.write(gc_response);
+            res.end();
+        });
+    }
 });
 
 server.listen(port, function() {
