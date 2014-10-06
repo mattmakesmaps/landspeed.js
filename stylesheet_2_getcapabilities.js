@@ -46,7 +46,7 @@ function create_layer_stub(stylesheet_layer, template_layer) {
 // Parse a mapnik stylesheet,
 // and return a get capabilities XML doc with layer names appended.
 module.exports = function(stylesheet_path, callback) {
-    fs.readFile('demo/world_latlon.xml', function (err, data) {
+    fs.readFile(stylesheet_path, function (err, data) {
         // Body of Callback
         xml_parser.parseString(data, function (err, result) {
             // Parse get_capabilities template
