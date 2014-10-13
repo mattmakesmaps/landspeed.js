@@ -12,7 +12,7 @@
   <Name>OGC:WMS</Name>
   <Title>Landspeed JS WMS Service</Title>
   <Abstract>Landspeed JS WMS Service Abstract</Abstract>
-  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://0.0.0.0:8000/?"/>
+  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost:8000/?"/>
   <ContactInformation>
   </ContactInformation>
 </Service>
@@ -23,8 +23,8 @@
       <Format>application/vnd.ogc.wms_xml</Format>
       <DCPType>
         <HTTP>
-          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://0.0.0.0:8000/?"/></Get>
-          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://0.0.0.0:8000/?"/></Post>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost:8000/?"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost:8000/?"/></Post>
         </HTTP>
       </DCPType>
     </GetCapabilities>
@@ -33,8 +33,8 @@
       <Format>image/png; mode=24bit</Format>
       <DCPType>
         <HTTP>
-          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://0.0.0.0:8000/?"/></Get>
-          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://0.0.0.0:8000/?"/></Post>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost:8000/?"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost:8000/?"/></Post>
         </HTTP>
       </DCPType>
     </GetMap>

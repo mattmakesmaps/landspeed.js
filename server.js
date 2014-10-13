@@ -102,7 +102,7 @@ var server = http.createServer(function(req, res) {
 
     if (uri.query.hasOwnProperty('request') && uri.query.request.toLowerCase() == 'getcapabilities') {
         // Create readstream to example getcapabilities response
-        mapnik2gc(process.argv[2], function(gc_response){
+        mapnik2gc(process.argv[2], req.headers.host, function(gc_response){
             // write out content type
             res.writeHead(200, {'Content-Type': 'application/vnd.ogc.wms_xml'});
             // pipe out xml to response
