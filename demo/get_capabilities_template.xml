@@ -54,22 +54,6 @@
     <SRS>EPSG:4326</SRS>
     <SRS>EPSG:3857</SRS>
     <LatLonBoundingBox minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
-    <Layer queryable="0" opaque="0" cascaded="0">
-        <Name>bathymetry</Name>
-        <Title>Elevation/Bathymetry</Title>
-        <SRS>EPSG:4326</SRS>
-        <LatLonBoundingBox minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
-        <BoundingBox SRS="EPSG:4326"
-                    minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
-    </Layer>
-    <Layer queryable="0" opaque="0" cascaded="0">
-        <Name>land_fn</Name>
-        <Title>Foreign Lands</Title>
-        <SRS>EPSG:4326</SRS>
-        <LatLonBoundingBox minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
-        <BoundingBox SRS="EPSG:4326"
-                    minx="-180.0" miny="-90.0" maxx="180.0" maxy="90.0" />
-    </Layer>
-  </Layer>
-</Capability>
-</WMT_MS_Capabilities>
+  <!--</Layer>-->
+<!--</Capability>-->
+<!--</WMT_MS_Capabilities>-->
